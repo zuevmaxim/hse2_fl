@@ -1,10 +1,16 @@
 #! /bin/bash
-bash compile.sh
-for d in $(ls tests); do
-    touch tests/$d/out.txt
-    cat tests/$d/in.txt | ./graph > diag.txt
-    dot -Tpng diag.txt -o tests/$d/DFA.png
-    cat tests/$d/in.txt | ./main | tee tests/$d/out.txt | ./graph > diag.txt
-    dot -Tpng diag.txt -o tests/$d/minDFA.png
-done
-rm diag.txt
+cd tests
+if [ "$1" = "clean" ]; then
+    for d in $(ls); do
+        rm -f $d/DFA.png $d/out.txt $d/minDFA.png
+    done
+else
+    for d in $(ls); do
+        cp ../main $d/
+        cd $d
+        ./main in.txt -o
+        cd ..
+        rm -f $d/main
+    done
+fi
+

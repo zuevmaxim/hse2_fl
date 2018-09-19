@@ -21,7 +21,7 @@ void minDFA::graphInvert() {
 			    g[G[i][j]][j].push_back(i);
 }
 
-bool minDFA::notEqual(int i, int j) {
+bool minDFA::notEqual(int i, int j) const {
     return (T.find(i) != T.end()) != (T.find(j) != T.end());
 }
 
@@ -81,7 +81,6 @@ void minDFA::buildNewDFA(int compNum) {
     std::swap(T, T2);
     std::swap(ans, G);
     q0 = comp[q0];
-    
 }
 
 void minDFA::minimize() {
@@ -91,7 +90,7 @@ void minDFA::minimize() {
     buildNewDFA(compNum);
 }
 
-void minDFA::writeDFA(std::ofstream& out) {
+void minDFA::writeDFA(std::ofstream& out) const {
     out << G.size() << '\n';
     out << S.size() << '\n';
     std::for_each(S.begin(), S.end(), [&out](auto& p) { out << p << ' '; });

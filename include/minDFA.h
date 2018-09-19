@@ -20,14 +20,14 @@ private:
     
     void dfs(int v);
     void graphInvert();
-    bool notEqual(int i, int j);
+    bool notEqual(int i, int j) const;
     void buildEqualTable();
     int findComponents();
     void buildNewDFA(int compNum);
 
 public:
     void minimize();
-    void writeDFA(std::ofstream& out);
+    void writeDFA(std::ofstream& out) const;
     void readDFA(std::ifstream& in);
 };
 

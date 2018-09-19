@@ -2,7 +2,10 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -pedantic -Iinclude -Wextra
 
-all: bin main
+all: install bin main
+
+install:
+	if ( ! dpkg -s graphviz | grep -iE "status" | grep -oiE "installed"); then sudo apt-get install graphviz; fi
 
 bin:
 	mkdir -p bin

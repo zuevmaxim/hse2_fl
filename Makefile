@@ -1,14 +1,12 @@
-.PHONY: clean all install
+.PHONY: clean all
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -pedantic -Iinclude -Wextra
 
-all: install bin main
-
-install:
-	if ( ! dpkg -s graphviz | grep -iE "status" | grep -oiE "installed"); then sudo apt-get install graphviz; fi
+all: bin main
 
 bin:
 	mkdir -p bin
+	if ( ! dpkg -s graphviz | grep -iE "status" | grep -oiE "installed"); then sudo apt-get install graphviz; fi
 
 main: bin/main.o bin/minDFA.o bin/DFAdraw.o
 	$(CXX) $(CXXFLAGS) bin/main.o bin/minDFA.o bin/DFAdraw.o -o main
